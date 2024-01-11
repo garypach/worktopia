@@ -1,25 +1,25 @@
 <?php
 
+namespace Framework;
+
+use PDO;
+
 class Database
 {
     public $conn;
 
-
-    /** 
+    /**
      * Constructor for Database class
      * 
      * @param array $config
-     * 
-     * 
      */
-
-    public function _construct($config)
+    public function __construct($config)
     {
         $dsn = "mysql:host={$config['host']};port={$config['port']};dbname={$config['dbname']}";
 
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
         ];
 
         try {
@@ -30,27 +30,27 @@ class Database
     }
 
     /**
-     * query database
+     * Query the database
      * 
      * @param string $query
+     * 
      * @return PDOStatement
      * @throws PDOException
-     *
-     * 
      */
-
     public function query($query, $params = [])
     {
         try {
-            $statement = $this->conn->prepare($query);
-            //bind named params
+            $sth = $this->conn->prepare($query);
+
+            // Bind named params
             foreach ($params as $param => $value) {
-                $statement->bindValue(':' . $param, $value);
+                $sth->bindValue(':' . $param, $value);
             }
-            $statement->execute();
-            return $statement;
+
+            $sth->execute();
+            return $sth;
         } catch (PDOException $e) {
-            throw new Exception("Query failed to execute:{$e->getMessage()}");
+            throw new Exception("Query failed to execute: {$e->getMessage()}");
         }
     }
 }

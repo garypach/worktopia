@@ -1,6 +1,6 @@
 <?php loadPartial('head') ?>
 <?php loadPartial('navbar') ?>
-<?php loadPartial('showcase') ?>
+
 <?php loadPartial('top-banner') ?>
 
 

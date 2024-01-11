@@ -1,0 +1,16 @@
+{
+    "name": "garypach/worktopia",
+    "description": "Job listing application",
+    "authors": [
+        {
+            "name": "G",
+            "email": "g@email.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "Framework/",
+            "App\\": "App/"
+        }
+    }
+}
